@@ -1,0 +1,3 @@
+create user apms identified by apms;
+
+grant dba to apms;

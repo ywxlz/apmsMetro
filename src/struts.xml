@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC 
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+	<struts>
+		<constant name="struts.ui.theme" value="simple" />
+		<constant name="struts.i18n.encoding" value="UTF-8" />
+		<constant name="struts.i18n.reload" value="true" />
+		<constant name="struts.action.excludePattern" value="/static/.*?" />
+		
+		<!-- 验证码 -->
+		<package name="Security" namespace="/" extends="struts-default">
+    		<action name="SecurityCodeImageAction" class="org.apms.action.SecurityCodeImageAction">
+        		<result name="success" type="stream">
+		            <param name="contentType">image/jpeg</param>
+		            <param name="inputName">imageStream</param>
+		            <param name="bufferSize">2048</param>
+		        </result>
+		    </action>
+		</package>
+		
+		<!-- 验证验证码 -->
+		<package name="vali" namespace="/" extends="json-default">
+    		<action name="valiCode" class="org.apms.action.ValiCodeAction">
+        		<result name="success" type="json">
+		        </result>
+		    </action>
+		</package>
+		
+		<!-- 验证注册的用户名 -->
+		<package name="valiName" namespace="/" extends="json-default">
+    		<action name="valiUsername" class="ValiUserNameAction">
+        		<result name="success" type="json">
+		        </result>
+		    </action>
+		</package>
+		
+		<!-- 用户注册和登陆 -->
+		<package name="userPackage" extends="struts-default" namespace="/">
+			<!-- 登陆 -->
+			<action name="loginAction" class="UserAction" method="login">
+				<result name="login" type="redirect">/index.jsp</result>
+				<result name="loginFailed" type="redirect">/html/user/loginFailed.html</result>
+			</action>
+			
+			<!-- 管理员登陆 -->
+			<action name="adminLogin" class="UserAction" method="adminLogin">
+				<result name="adminLogin" type="redirect">/html/admin/index.jsp</result>
+				<result name="loginFailed" type="redirect">/html/user/loginFailed.html</result>
+			</action>
+			
+			<!-- 管理员注销 -->
+			<action name="adminLogout" class="UserAction" method="adminLogout">
+				<result name="adminLogout" type="redirect">/html/admin/login.jsp</result>
+			</action>
+			
+			<!-- 注册 -->
+			<action name="registerAction" class="UserAction" method="register">
+				<result name="register" type="redirect">/index.jsp?no=3</result>
+				<result name="failed" type="redirect">/html/user/registerFailed.html</result>
+			</action>
+			
+			<!-- 注销 -->
+			<action name="logoutAction" class="UserAction" method="logout">
+				<result name="logout" type="redirect">/index.jsp?no=3</result>
+			</action>
+			
+			<!-- 查询用户 -->
+			<action name="queryUserAction" class="UserAction" method="queryUser">
+				<result name="queryUser" type="redirect">/html/admin/user.jsp</result>
+			</action>
+			
+			<!-- 管理员资料 -->
+			<action name="adminInfoAction" class="UserAction" method="adminInfo">
+				<result name="adminInfo" type="redirect">/html/admin/info.jsp</result>
+			</action>
+			
+			<!-- 管理员资料修改 -->
+			<action name="adminInfoEditAction" class="UserAction" method="adminInfoEdit">
+				<result name="adminInfoEdit" type="redirect">adminInfoAction</result>
+				<result name="adminInfoFailed" type="redirect">/html/admin/modifyFailed.html</result>
+			</action>
+			
+			<!-- 用户资料修改 -->
+			<action name="userInfoEditAction" class="UserAction" method="userInfoEdit">
+				<result name="userInfoEdit" type="redirect">/index.jsp?no=1</result>
+				<result name="userInfoFailed" type="redirect">/html/user/modifyFailed.html</result>
+			</action>
+		</package>
+		
+		<!-- 功能  -->
+		<package name="functionPackage" extends="struts-default" namespace="/">
+			<action name="queryAction" class="AllFunctionAction" method="query">
+				<result name="query"></result>
+			</action>
+		</package>
+		
+		<!-- 通讯业务  -->
+		<package name="comRequestPackage" extends="struts-default" namespace="/">
+			<action name="addComRequestAction" class="ComRequestAction" method="add">
+				<result name="add" type="redirect">/index.jsp?no=2</result>
+			</action>
+			
+			<!-- 用户查询明细 -->
+			<action name="comRequestDetailAction" class="ComRequestAction" method="queryComDeatil">
+				<result name="queryComDeatil" type="redirect">/html/user/comRequest.jsp</result>
+			</action>
+		</package>
+		
+		<!-- 部门  -->
+		<package name="deptPackage" extends="struts-default" namespace="/">
+			<action name="queryAction" class="DeptAction" method="query">
+				<!-- 不要被名字迷惑 这其实是博客 -->
+				<result name="query"></result>
+			</action>
+		</package>
+		
+		<!-- 邮件申请单  -->
+		<package name="emailRequestPackage" extends="struts-default" namespace="/">
+			<action name="queryAction" class="EmailRequestAction" method="query">
+				<result name="query"></result>
+			</action>
+			<action name="addEmailAction" class="EmailRequestAction" method="add">
+				<result name="add" type="redirect">/index.jsp?no=2</result>
+			</action>
+			
+			<!-- 用户查询明细 -->
+			<action name="emailRequestDetailAction" class="EmailRequestAction" method="queryDetail">
+				<result name="queryDetail" type="redirect">/html/user/emailRequest.jsp</result>
+			</action>
+		</package>
+		
+		<!-- 功能类型  -->
+		<package name="functionTypePackage" extends="struts-default" namespace="/">
+			<action name="queryAction" class="FunctionTypeAction" method="query">
+				<result name="query"></result>
+			</action>
+		</package>
+		
+		<!-- ip申请单  -->
+		<package name="ipRequestPackage" extends="struts-default" namespace="/">
+			<action name="queryAction" class="IPRequestAction" method="query">
+				<result name="query"></result>
+			</action>
+			<action name="addIPAction" class="IPRequestAction" method="add">
+				<result name="add" type="redirect">/index.jsp?no=2</result>
+			</action>
+			
+			<!-- 用户查询明细 -->
+			<action name="IPRequestDetailAction" class="IPRequestAction" method="queryIPDetail">
+				<result name="queryIPDetail" type="redirect">/html/user/IPRequest.jsp</result>
+			</action>
+		</package>
+		
+		<!-- 日志  -->
+		<package name="LogPackage" extends="struts-default" namespace="/">
+			<action name="queryAction" class="LogAction" method="query">
+				<result name="query"></result>
+			</action>
+		</package>
+		
+		<!-- 其他申请单  -->
+		<package name="otherRequestPackage" extends="struts-default" namespace="/">
+			<action name="queryAction" class="OtherRequestAction" method="query">
+				<result name="query"></result>
+			</action>
+			<action name="addOtherAction" class="OtherRequestAction" method="add">
+				<result name="add" type="redirect">/index.jsp?no=2</result>
+			</action>
+			
+			<!-- 用户查询明细 -->
+			<action name="otherRequestDetailAction" class="OtherRequestAction" method="queryOtherDetail">
+				<result name="queryOtherDetail" type="redirect">/html/user/otherRequest.jsp</result>
+			</action>
+		</package>
+		
+		<!-- 电话会议申请单  -->
+		<package name="phoneRequestPackage" extends="struts-default" namespace="/">
+			<action name="queryAction" class="PhoneRequestAction" method="query">
+				<result name="query"></result>
+			</action>
+			<action name="addPhoneAction" class="PhoneRequestAction" method="add">
+				<result name="add" type="redirect">/index.jsp?no=2</result>
+			</action>
+			
+			<!-- 用户查询明细 -->
+			<action name="phoneRequestDetailAction" class="PhoneRequestAction" method="queryPhoneDetail">
+				<result name="queryPhoneDetail" type="redirect">/html/user/phoneRequest.jsp</result>
+			</action>
+		</package>
+		
+		<!-- 申请单  -->
+		<package name="RequestPackage" extends="struts-default" namespace="/">
+			<action name="queryRequestAction" class="RequestAction" method="query">
+				<result name="query" type="redirect">/html/admin/request.jsp</result>
+			</action>
+			
+			<!-- 用户申请单查询 -->
+			<action name="userQueryRequest" class="RequestAction" method="userQueryRequest">
+				<result name="userQueryRequest" type="redirect">/html/user/request.jsp</result>
+			</action>
+			
+			<action name="stateRequestAction" class="RequestAction" method="approvalRequest">
+				<result name="approval" type="redirect">/html/admin/approval.jsp</result>
+			</action>
+			
+			<action name="requestDetailAction" class="RequestAction" method="requestDetail">
+				<result name="requestDetail" type="redirect">/html/admin/requestDetail.jsp</result>
+				<result name="comDetail" type="redirect">/html/admin/comDetail.jsp</result>
+				<result name="phoneDetail" type="redirect">/html/admin/phoneDetail.jsp</result>
+				<result name="spaceDetail" type="redirect">/html/admin/spaceDetail.jsp</result>
+				<result name="emailDetail" type="redirect">/html/admin/emailDetail.jsp</result>
+				<result name="IPDetail" type="redirect">/html/admin/IPDetail.jsp</result>
+				<result name="otherDetail" type="redirect">/html/admin/otherDetail.jsp</result>
+			</action>
+			<action name="approvalRequestAction" class="RequestAction" method="approvalRequestAction">
+				<result name="approvalRequestAction"  type="redirect">/html/admin/approvalSuccess.jsp</result>
+			</action>
+			<action name="queryComRequestAction" class="RequestAction" method="queryComRequest">
+				<result name="queryComRequest"  type="redirect">/html/admin/request.jsp</result>
+			</action>
+			<action name="queryEmailRequestAction" class="RequestAction" method="queryEmailRequest">
+				<result name="queryEmailRequest"  type="redirect">/html/admin/request.jsp</result>
+			</action>
+			<action name="queryIPRequestAction" class="RequestAction" method="queryIPRequest">
+				<result name="queryIPRequest"  type="redirect">/html/admin/request.jsp</result>
+			</action>
+			<action name="queryOtherRequestAction" class="RequestAction" method="queryOtherRequest">
+				<result name="queryOtherRequest"  type="redirect">/html/admin/request.jsp</result>
+			</action>
+			<action name="queryPhoneRequestAction" class="RequestAction" method="queryPhoneRequest">
+				<result name="queryPhoneRequest"  type="redirect">/html/admin/request.jsp</result>
+			</action>
+			<action name="querySpaceRequestAction" class="RequestAction" method="querySpaceRequest">
+				<result name="querySpaceRequest"  type="redirect">/html/admin/request.jsp</result>
+			</action>
+		</package>
+		
+		<!-- 角色  -->
+		<package name="rolePackage" extends="struts-default" namespace="/">
+			<action name="queryAction" class="RoleAction" method="query">
+				<result name="query"></result>
+			</action>
+		</package>
+		
+		<!-- 存储空间申请单  -->
+		<package name="spaceRequestPackage" extends="struts-default" namespace="/">
+			<action name="queryAction" class="SpaceRequestAction" method="query">
+				<result name="query"></result>
+			</action>
+			<action name="addSpaceAction" class="SpaceRequestAction" method="add">
+				<result name="add" type="redirect">/index.jsp?no=2</result>
+			</action>
+			
+			<!-- 用户查询明细 -->
+			<action name="spaceRequestDetailAction" class="SpaceRequestAction" method="querySpaceDetail">
+				<result name="querySpaceDetail" type="redirect">/html/user/spaceRequest.jsp</result>
+			</action>
+		</package>
+		
+	</struts>

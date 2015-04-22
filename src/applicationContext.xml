@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
+
+		<!-- 1、定义数据源的信息 -->
+	 <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<!-- jdbc配置 -->
+		<!-- Mysql
+		<property name="driverClass">
+			<value>com.mysql.jdbc.Driver</value>
+		</property>
+		<property name="jdbcUrl">
+			<value>jdbc:mysql://localhost:3306/posts</value>
+		</property>
+		 -->
+		<!-- Oracle -->
+		<property name="driverClass">
+			<value>oracle.jdbc.driver.OracleDriver</value>
+		</property>
+		<property name="jdbcUrl">
+			<value>jdbc:oracle:thin:@localhost:1521:orcl</value>
+		</property>
+		
+		<property name="user">
+			<value>apms</value>
+		</property>
+		<property name="password">
+			<value>apms</value>
+		</property>
+		<!-- 连接池的配置 -->
+		<property name="maxPoolSize">
+			<value>80</value>
+		</property>
+		<property name="minPoolSize">
+			<value>1</value>
+		</property>
+		<property name="initialPoolSize">
+			<value>1</value>
+		</property>
+		<property name="maxIdleTime">
+			<value>20</value>
+		</property>
+	</bean>   
+	<!-- 2、配置sessionFactory对象 -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<!-- 2.1 配置dataSource属性 -->
+		<property name="dataSource">
+			<ref local="dataSource" />
+		</property>
+		
+		<!-- 2.2配置mappingResources属性 -->
+		<property name="mappingResources">
+			<list>
+				<value>org/apms/bean/AllFunction.hbm.xml</value>
+				<value>org/apms/bean/ComRequest.hbm.xml</value>
+				<value>org/apms/bean/Dept.hbm.xml</value>
+				<value>org/apms/bean/EmailRequest.hbm.xml</value>
+				<value>org/apms/bean/FunctionType.hbm.xml</value>
+				<value>org/apms/bean/IPRequest.hbm.xml</value>
+				<value>org/apms/bean/Log.hbm.xml</value>
+				<value>org/apms/bean/OtherRequest.hbm.xml</value>
+				<value>org/apms/bean/PhoneRequest.hbm.xml</value>
+				<value>org/apms/bean/Request.hbm.xml</value>
+				<value>org/apms/bean/RequestType.hbm.xml</value>
+				<value>org/apms/bean/Role.hbm.xml</value>
+				<value>org/apms/bean/SpaceRequest.hbm.xml</value>
+				<value>org/apms/bean/Users.hbm.xml</value>
+				<!-- 
+				<value>org/apms/bean/</value>
+ 				 -->
+			</list>
+		</property>
+		
+		<!-- 2.3配置hibernateProperties  hibernate的属性 -->
+		<property name="hibernateProperties">
+			<props>
+				<!-- Mysql
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				 -->
+				<!-- Oracle -->
+				<prop key="hibernate.dialect">org.hibernate.dialect.Oracle9Dialect</prop>
+				<prop key="show_sql">true</prop>
+				<prop key="hibernate.jdbc.batch_size">20</prop>
+				<!-- <prop key="hibernate.connection.autocommit">true</prop> -->
+			</props>
+		</property>
+	</bean>
+	
+	<!-- 3、配置事务管理器 -->
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- 	配置事务的传播特性 -->
+	<tx:advice id="txAdvice">
+		<tx:attributes>
+			<tx:method name="get*" read-only="true" />
+			<tx:method name="find*" read-only="true" />
+			<tx:method name="query*" read-only="true" />
+			<tx:method name="*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+	
+	<!-- 	AOP切面编程来整合事务	 -->
+	<aop:config>
+		<aop:advisor pointcut="execution(* org.apms.service.impl.*Service*.*(..))" advice-ref="txAdvice" />
+	</aop:config>
+	
+	<!-- 4、配置dao层对象 -->
+	<!-- 所有功能Dao -->
+	<bean id="allFunctionDao" class="org.apms.dao.impl.AllFunctionDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- 通讯业务Dao -->
+	<bean id="comRequestDao" class="org.apms.dao.impl.ComRequestDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- 部门Dao -->
+	<bean id="deptDao" class="org.apms.dao.impl.DeptDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- 邮件业务Dao -->
+	<bean id="emailRequestDao" class="org.apms.dao.impl.EmailRequestDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- 功能类型Dao -->
+	<bean id="functionTypeDao" class="org.apms.dao.impl.FunctionTypeDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- ip申请单Dao -->
+	<bean id="ipRequestDao" class="org.apms.dao.impl.IPRequestDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- 日志Dao -->
+	<bean id="logDao" class="org.apms.dao.impl.LogDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- 其他申请单Dao -->
+	<bean id="otherRequestDao" class="org.apms.dao.impl.OtherRequestDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- 电话会议申请单Dao -->
+	<bean id="phoneRequestDao" class="org.apms.dao.impl.PhoneRequestDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- 基本申请单Dao -->
+	<bean id="requestDao" class="org.apms.dao.impl.RequestDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- 申请单类型Dao -->
+	<bean id="requestTypeDao" class="org.apms.dao.impl.RequestTypeDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- 角色Dao -->
+	<bean id="roleDao" class="org.apms.dao.impl.RoleDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- 存储空间Dao -->
+	<bean id="spaceRequestDao" class="org.apms.dao.impl.SpaceRequestDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- 用户Dao -->
+	<bean id="userDao" class="org.apms.dao.impl.UsersDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	 
+	<!-- 5、配置service层对象 -->
+	<!-- 所有功能Service -->
+	<bean id="allFunctionService" class="org.apms.service.impl.AllFunctionServiceImpl">
+		<property name="allFunctionDao" ref="allFunctionDao" />
+	</bean>
+	
+	<!-- 通讯业务Service -->
+	<bean id="comRequestService" class="org.apms.service.impl.ComRequestServiceImpl">
+		<property name="comRequestDao" ref="comRequestDao" />
+	</bean>
+	
+	<!-- 部门Service -->
+	<bean id="deptService" class="org.apms.service.impl.DeptServiceImpl">
+		<property name="deptDao" ref="deptDao" />
+	</bean>
+	
+	<!-- 邮件申请单Service -->
+	<bean id="emailRequestService" class="org.apms.service.impl.EmailRequestServiceImpl">
+		<property name="emailRequestDao" ref="emailRequestDao" />
+	</bean>
+	
+	<!-- 功能类型Service -->
+	<bean id="functionTypeService" class="org.apms.service.impl.FunctionTypeServiceImpl">
+		<property name="functionTypeDao" ref="functionTypeDao" />
+	</bean>
+	
+	<!-- ip申请单Service -->
+	<bean id="ipRequestService" class="org.apms.service.impl.IPRequestServiceImpl">
+		<property name="ipRequestDao" ref="ipRequestDao" />
+	</bean>
+	
+	<!-- 日志Service -->
+	<bean id="logService" class="org.apms.service.impl.LogServiceImpl">
+		<property name="logDao" ref="logDao" />
+	</bean>
+	
+	<!-- 其他申请单Service -->
+	<bean id="otherRequestService" class="org.apms.service.impl.OtherRequestServiceImpl">
+		<property name="otherRequestDao" ref="otherRequestDao" />
+	</bean>
+	
+	<!-- 电话会议申请单Service -->
+	<bean id="phoneRequestService" class="org.apms.service.impl.PhoneRequestServiceImpl">
+		<property name="phoneRequestDao" ref="phoneRequestDao" />
+	</bean>
+	
+	<!-- 基本申请单Service -->
+	<bean id="requestService" class="org.apms.service.impl.RequestServiceImpl">
+		<property name="requestDao" ref="requestDao" />
+	</bean>
+	
+	<!-- 申请单类型Service -->
+	<bean id="requestTypeService" class="org.apms.service.impl.RequestTypeServiceImpl">
+		<property name="requestTypeDao" ref="requestTypeDao" />
+	</bean>
+	
+	<!-- 角色Service -->
+	<bean id="roleService" class="org.apms.service.impl.RoleServiceImpl">
+		<property name="roleDao" ref="roleDao" />
+		
+	</bean>
+	
+	<!-- 存储空间申请单Service -->
+	<bean id="spaceRequestService" class="org.apms.service.impl.SpaceRequestServiceImpl">
+		<property name="spaceRequestDao" ref="spaceRequestDao" />
+	</bean>
+	
+	<!-- 用户Service -->
+	<bean id="userService" class="org.apms.service.impl.UsersServiceImpl">
+		<property name="userDao" ref="userDao" />
+	</bean>
+	
+	
+ 
+	<!-- 6、配置action层对象 -->
+	<!-- 所有功能Action -->
+	<bean id="AllFuncionAction" class="org.apms.action.AllFunctionAction">
+		<property name="allFunctionService" ref="allFunctionService" />
+	</bean>
+	
+	<!-- 通讯业务申请单Action -->
+	<bean id="ComRequestAction" class="org.apms.action.ComRequestAction">
+		<property name="comRequestService" ref="comRequestService" />
+		<property name="userService" ref="userService" />
+		<property name="requestService" ref="requestService" />
+	</bean>
+	
+	<!-- 部门Action -->
+	<bean id="DeptAction" class="org.apms.action.DeptAction">
+		<property name="deptService" ref="deptService" />
+	</bean>
+	
+	<!-- 邮件申请单Action -->
+	<bean id="EmailRequestAction" class="org.apms.action.EmailRequestAction">
+		<property name="emailRequestService" ref="emailRequestService" />
+		<property name="userService" ref="userService" />
+		<property name="requestService" ref="requestService" />
+	</bean>
+	
+	<!-- 功能类型Action -->
+	<bean id="FunctionTypeAction" class="org.apms.action.FunctionTypeAction">
+		<property name="functionTypeService" ref="functionTypeService" />
+	</bean>
+	
+	<!-- ip申请单Action -->
+	<bean id="IPRequestAction" class="org.apms.action.IPRequestAction">
+		<property name="ipRequestService" ref="ipRequestService" />
+		<property name="userService" ref="userService" />
+		<property name="requestService" ref="requestService" />
+	</bean>
+	
+	<!-- 日志Action -->
+	<bean id="LogAction" class="org.apms.action.LogAction">
+		<property name="logService" ref="logService" />
+	</bean>
+	
+	<!-- 其他申请单Action -->
+	<bean id="OtherRequestAction" class="org.apms.action.OtherRequestAction">
+		<property name="otherRequestService" ref="otherRequestService" />
+		<property name="userService" ref="userService" />
+		<property name="requestService" ref="requestService" />
+	</bean>
+	
+	<!-- 电话会议申请单Action -->
+	<bean id="PhoneRequestAction" class="org.apms.action.PhoneRequestAction">
+		<property name="phoneRequestService" ref="phoneRequestService" />
+		<property name="userService" ref="userService" />
+		<property name="requestService" ref="requestService" />
+	</bean>
+	
+	<!-- 普通申请单Action -->
+	<bean id="RequestAction" class="org.apms.action.RequestAction">
+		<property name="requestService" ref="requestService" />
+		<property name="userService" ref="userService" />
+		<property name="requestTypeService" ref="requestTypeService" />
+		<property name="phoneRequestService" ref="phoneRequestService" />
+		<property name="otherRequestService" ref="otherRequestService" />
+		<property name="ipRequestService" ref="ipRequestService" />
+		<property name="emailRequestService" ref="emailRequestService" />
+		<property name="comRequestService" ref="comRequestService" />
+		<property name="spaceRequestService" ref="spaceRequestService" />
+		<property name="deptService" ref="deptService" />
+	</bean>
+	
+	<!-- 申请单类型Action -->
+	<bean id="RequestTypeAction" class="org.apms.action.RequestTypeAction">
+		<property name="requestTypeService" ref="requestTypeService" />
+	</bean>
+	
+	<!-- 角色Action -->
+	<bean id="RoleAction" class="org.apms.action.RoleAction">
+		<property name="roleService" ref="roleService" />
+	</bean>
+	
+	<!-- 存储空间申请单Action -->
+	<bean id="SpaceRequestAction" class="org.apms.action.SpaceRequestAction">
+		<property name="spaceRequestService" ref="spaceRequestService" />
+		<property name="userService" ref="userService" />
+		<property name="requestService" ref="requestService" />
+	</bean>
+	
+	<!-- 用户Action -->
+	<bean id="UserAction" class="org.apms.action.UserAction">
+		<property name="userService" ref="userService" />
+		<property name="deptService" ref="deptService" />
+		<property name="roleService" ref="roleService" />
+	</bean>
+	
+	<!-- 用户注册时用户名验证Action -->
+	<bean id="ValiUserNameAction" class="org.apms.action.ValiUserNameAction">
+		<property name="userService" ref="userService" />
+	</bean>
+	
+	
+
+</beans>

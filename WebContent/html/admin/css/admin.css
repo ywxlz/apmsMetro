@@ -1,0 +1,9 @@
+.admin {
+	font-size: x-large;
+	color: white;
+}
+
+#adminLogout {
+	color: blue;
+	cursor: pointer;
+}

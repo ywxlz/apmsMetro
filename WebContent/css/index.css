@@ -1,0 +1,50 @@
+#registerEnter {
+	color: blue;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+#loginEnter {
+	color: blue;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+#loginDiv {
+	text-align: center;
+}
+
+#adminEnter {
+	position: absolute;
+	z-index: 2;
+	left: 60px;
+	top: 150px;
+	color: white;
+	font-size: xx-large;
+	cursor: pointer;
+}
+
+#temp_text {
+	position: absolute;
+	z-index: 2;
+	left: 30px;
+	top: 20px;
+	color: white;
+	font-size: xx-large;
+}
+
+#userManagerToLogin {
+	color: blue;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.temp_login {
+	color: blue;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+#requestToLogin {
+	cursor: pointer;
+}

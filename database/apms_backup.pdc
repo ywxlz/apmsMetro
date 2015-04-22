@@ -1,0 +1,141 @@
+--角色表（Role）
+create table role(
+       id varchar2(100) primary key,        --id
+       name varchar2(20) not null,          --角色名称
+       mark number(8) default(1)            --状态（0.删除，1.未删除）
+);
+
+--部门表（Dept）
+create table dept(
+       id varchar2(100) primary key,        --id
+       name varchar2(20) not null,          --部门名称
+       headerName varchar2(20) not null,    --部门领导名
+       remark varchar2(500),                --备注
+       mark number(8) default(1)            --状态（0.删除，1.未删除）
+);
+
+--用户表（Users）
+create table users(
+       id varchar2(100) primary key,        --id
+       username varchar2(20) not null,      --用户名
+       password varchar2(20) not null,      --密码
+       realName varchar2(20),               --真实姓名
+       rid varchar2(100) not null,          --角色id
+       did varchar2(100) not null,          --部门id
+       src varchar2(500),                   --照片路径消息
+       mark number(8) default(1)            --状态（0.删除，1.未删除）
+);
+
+--申请单类型
+create table RequestType(
+       id varchar2(100) primary key,        --id
+       name varchar2(20) not null,          --申请单名称
+       mark number(8) default(1)            --状态(0.删除，1.未删除)
+);
+
+--基本申请单
+create table request(
+       id varchar2(100) primary key,        --id
+       state number(8),                     --状态(待审批(0)，待分配(1)，待处理(2)，待反馈(3)，归档(4)，审批否决(5))
+       userId varchar2(100) not null,          --申请人id
+       rtid varchar2(100) not null,         --申请单类型id
+       approval varchar2(50),               --审批人
+       assigner varchar2(50),               --分配人
+       dispose varchar2(50),                --处理人
+       phone varchar2(50),                  --电话号码
+       title varchar2(500),                 --标题
+       reason varchar2(200),                --原因
+       appendix varchar2(50),               --附件
+       remark varchar2(200),                --备注
+       time varchar2(50),                   --时间
+       did varchar2(100) not null,          --部门id
+       updateTime varchar2(50),             --更新时间
+       mark number(8) default(1)            --状态（0.删除，1.未删除）
+);
+
+--IP申请单
+create table IPRequest(
+       id varchar2(100) primary key,        --id
+       count number(8) not null,            --申请数量
+       address varchar2(100) not null,      --申请地址
+       time varchar2(50),                   --时间
+       mark number(8) default(1)            --状态（0.删除，1.未删除）
+);
+
+--邮件申请单
+create table EmailRequest(
+       id varchar2(100) primary key,        --id
+       interSpace varchar2(30) not null,    --内存
+       address varchar2(100) not null,      --邮件地址
+       username varchar2(20) not null,      --使用者姓名
+       mark number(8) default(1)            --状态（0.删除，1.未删除）
+);
+
+--储存空间申请单
+create table SpaceRequest(
+       id varchar2(100) primary key,        --id
+       interSpace varchar2(30) not null,    --内存
+       time varchar2(50) not null,          --使用时间
+       username varchar2(20) not null,      --使用者姓名
+       mark number(8) default(1)            --状态（0.删除，1.未删除）
+);
+
+--电话会议申请单
+create table PhoneRequest(
+       id varchar2(100) primary key,        --id
+       address varchar2(100) not null,      --会议地址
+       time varchar2(50) not null,          --会议时间
+       count number(8) not null,            --与会人数
+       device varchar2(100) not null,       --设备支持
+       startTime varchar2(50),              --开始时间
+       closeTime varchar2(50),              --结束时间
+       mark number(8) default(1)            --状态（0.删除，1.未删除）
+);
+
+--通讯业务申请单
+create table ComRequest(
+       id varchar2(100) primary key,        --id
+       address varchar2(100) not null,      --地址
+       time varchar2(50) not null,          --时间
+       mark number(8) default(1)            --状态（0.删除，1.未删除）
+);
+
+--其他问题申请单
+create table OtherRequest(
+       id varchar2(100) primary key,        --id
+       describe varchar2(100) not null,     --描述
+       rid varchar2(100) not null,          --申请单id
+       mark number(8) default(1)            --状态（0.删除，1.未删除）
+);
+
+--操作日志
+create table log(
+       id varchar2(100) primary key,        --id
+       rid varchar2(100) not null,          --申请单id
+       type varchar2(20) not null,          --操作类型
+       time varchar2(50) not null,          --操作时间
+       userId varchar2(100) not null,       --用户id
+       context varchar2(200),               --操作内容
+       remark varchar2(200),                --备注
+       mark number(8)                       --状态（0.删除，1.未删除）
+);
+
+--功能类型
+create table FunctionType(
+       id varchar2(100) primary key,        --id
+       name varchar2(50),                   --功能类型名称
+       mark number(8)                       --状态（0.删除，1.未删除）
+);
+
+--所有功能
+create table AllFunction(
+       id varchar2(100) primary key,        --id
+       name varchar2(50),                   --功能名称
+       ul varchar2(100),                    --备用
+       fid varchar2(100) not null,          --功能类型id
+       rid varchar2(100) not null,          --角色id
+       status number(8),                    --状态（1.显示，2.不显示）
+       state number(8),                     --状态(待审批(0)，待分配(1)，待处理(2)，待反馈(3)，归档(4)，审批否决(5))
+       mark number(8)                       --状态（0.删除，1.未删除）
+);
+

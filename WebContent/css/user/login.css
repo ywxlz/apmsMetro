@@ -1,0 +1,304 @@
+/* 登陆css开始 */
+#loginTable {
+	margin-top: 20px;
+}
+
+#username {
+	width: 270px;
+	height: 40px;
+	margin-left: 10px;
+	margin-top: 10px;
+	border: 0px black solid;
+	border-bottom: 1px #60B0D8 solid;
+	background-color: #CCCCCC;
+}
+
+#password {
+	width: 270px;
+	height: 40px;
+	margin-left: 10px;
+	margin-top: 10px;
+	border: 0px black solid;
+	border-bottom: 1px #60B0D8 solid;
+	background-color: #CCCCCC;
+}
+
+#veriCode {
+	width: 70px;
+	height: 40px;
+	margin-left: 10px;
+	margin-top: 10px;
+	border: 0px black solid;
+	border-bottom: 1px #60B0D8 solid;
+	background-color: #CCCCCC;
+}
+
+#securityCode {
+	width: 70px;
+	height: 40px;
+}
+
+
+.register input[type=submit] {
+	border: 0;
+	padding: 12px;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border: 1px solid rgba(0, 0, 0 , .1);
+	font-size: 13px;
+	font-weight: 300;
+	width: 150px;
+	text-align: center;
+	margin-top: 20px;
+	background: #52a8e8; /* Old browsers */
+	background: -moz-linear-gradient(top,  #52a8e8 0%, #377ad0 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#52a8e8), color-stop(100%,#377ad0));
+	background: -webkit-linear-gradient(top,  #52a8e8 0%,#377ad0 100%);
+	background: -o-linear-gradient(top,  #52a8e8 0%,#377ad0 100%);
+	background: -ms-linear-gradient(top,  #52a8e8 0%,#377ad0 100%);
+	background: linear-gradient(to bottom,  #52a8e8 0%,#377ad0 100%);
+	border-right: 1px solid #2e69a3;
+	border-bottom: 1px solid #20559a;
+	border-left: 1px solid #2e69a3;
+	font-weight: bold;
+	color: #fff;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, .3);
+	text-transform: uppercase;
+	-webkit-box-shadow: inset 0 1px 0 0 #72b9eb, 0 1px 2px 0 #b3b3b3;
+    box-shadow: inset 0 1px 0 0 #72b9eb, 0 1px 2px 0 #b3b3b3;
+    font-size: 12px;
+    letter-spacing: 4px;
+}
+
+.register input[type=reset] {
+	border: 0;
+	padding: 12px;
+	margin-left: 30px;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border: 1px solid rgba(0, 0, 0 , .1);
+	font-size: 13px;
+	font-weight: 300;
+	width: 150px;
+	text-align: center;
+	margin-top: 20px;
+	background: #52a8e8; /* Old browsers */
+	background: -moz-linear-gradient(top,  #52a8e8 0%, #377ad0 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#52a8e8), color-stop(100%,#377ad0));
+	background: -webkit-linear-gradient(top,  #52a8e8 0%,#377ad0 100%);
+	background: -o-linear-gradient(top,  #52a8e8 0%,#377ad0 100%);
+	background: -ms-linear-gradient(top,  #52a8e8 0%,#377ad0 100%);
+	background: linear-gradient(to bottom,  #52a8e8 0%,#377ad0 100%);
+	border-right: 1px solid #2e69a3;
+	border-bottom: 1px solid #20559a;
+	border-left: 1px solid #2e69a3;
+	font-weight: bold;
+	color: #fff;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, .3);
+	text-transform: uppercase;
+	-webkit-box-shadow: inset 0 1px 0 0 #72b9eb, 0 1px 2px 0 #b3b3b3;
+    box-shadow: inset 0 1px 0 0 #72b9eb, 0 1px 2px 0 #b3b3b3;
+    font-size: 12px;
+    letter-spacing: 4px;
+}
+
+#loginTip {
+	position: absolute;
+	z-index: 2;
+	left: 70px;
+	top: 200px;
+	color: red;
+	font-size: xx-large;
+}
+
+/* 登陆css结束 */
+
+/* 注册css开始 */
+#registerDiv input[type=text] {
+	width: 250px;
+	height: 40px;
+	margin-left: 10px;
+	margin-top: 10px;
+}
+
+#registerDiv input[type=password] {
+	width: 250px;
+	height: 40px;
+	margin-left: 10px;
+	margin-top: 10px;
+}
+
+#registerTable {
+	margin-top: 20px;
+	text-align: right;
+}
+
+#registerUsername {
+	width: 270px;
+	height: 40px;
+	margin-left: 10px;
+	margin-top: 10px;
+	border: 0px black solid;
+	border-bottom: 1px #60B0D8 solid;
+	background-color: #CCCCCC;
+}
+
+#registerRealName {
+	width: 270px;
+	height: 40px;
+	margin-left: 10px;
+	margin-top: 10px;
+	border: 0px black solid;
+	border-bottom: 1px #60B0D8 solid;
+	background-color: #CCCCCC;
+}
+
+#registerPassword {
+	width: 270px;
+	height: 40px;
+	margin-left: 10px;
+	margin-top: 10px;
+	border: 0px black solid;
+	border-bottom: 1px #60B0D8 solid;
+	background-color: #CCCCCC;
+}
+
+#registerRePassword {
+	width: 270px;
+	height: 40px;
+	margin-left: 10px;
+	margin-top: 10px;
+	border: 0px black solid;
+	border-bottom: 1px #60B0D8 solid;
+	background-color: #CCCCCC;
+}
+
+#registerTip {
+	position: absolute;
+	z-index: 2;
+	left: 70px;
+	top: 200px;
+	color: red;
+	font-size: xx-large;
+}
+
+#editTip {
+	position: absolute;
+	z-index: 2;
+	left: 70px;
+	top: 200px;
+	color: red;
+	font-size: xx-large;
+}
+
+input[type=button] {
+	border: 0;
+	padding: 12px;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border: 1px solid rgba(0, 0, 0 , .1);
+	font-size: 13px;
+	font-weight: 300;
+	width: 340px;
+	text-align: center;
+	margin-top: 20px;
+	background: #52a8e8; /* Old browsers */
+	background: -moz-linear-gradient(top,  #52a8e8 0%, #377ad0 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#52a8e8), color-stop(100%,#377ad0));
+	background: -webkit-linear-gradient(top,  #52a8e8 0%,#377ad0 100%);
+	background: -o-linear-gradient(top,  #52a8e8 0%,#377ad0 100%);
+	background: -ms-linear-gradient(top,  #52a8e8 0%,#377ad0 100%);
+	background: linear-gradient(to bottom,  #52a8e8 0%,#377ad0 100%);
+	border-right: 1px solid #2e69a3;
+	border-bottom: 1px solid #20559a;
+	border-left: 1px solid #2e69a3;
+	font-weight: bold;
+	color: #fff;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, .3);
+	text-transform: uppercase;
+	-webkit-box-shadow: inset 0 1px 0 0 #72b9eb, 0 1px 2px 0 #b3b3b3;
+    box-shadow: inset 0 1px 0 0 #72b9eb, 0 1px 2px 0 #b3b3b3;
+    font-size: 12px;
+    letter-spacing: 4px;
+}
+/* 注册结束 */
+
+/* 注销开始 */
+#logoutButton {
+	border: 0;
+	padding: 12px;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border: 1px solid rgba(0, 0, 0 , .1);
+	font-size: 13px;
+	font-weight: 300;
+	width: 340px;
+	text-align: center;
+	margin-top: 20px;
+	background: #52a8e8; /* Old browsers */
+	background: -moz-linear-gradient(top,  #52a8e8 0%, #377ad0 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#52a8e8), color-stop(100%,#377ad0));
+	background: -webkit-linear-gradient(top,  #52a8e8 0%,#377ad0 100%);
+	background: -o-linear-gradient(top,  #52a8e8 0%,#377ad0 100%);
+	background: -ms-linear-gradient(top,  #52a8e8 0%,#377ad0 100%);
+	background: linear-gradient(to bottom,  #52a8e8 0%,#377ad0 100%);
+	border-right: 1px solid #2e69a3;
+	border-bottom: 1px solid #20559a;
+	border-left: 1px solid #2e69a3;
+	font-weight: bold;
+	color: #fff;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, .3);
+	text-transform: uppercase;
+	-webkit-box-shadow: inset 0 1px 0 0 #72b9eb, 0 1px 2px 0 #b3b3b3;
+    box-shadow: inset 0 1px 0 0 #72b9eb, 0 1px 2px 0 #b3b3b3;
+    font-size: 12px;
+    letter-spacing: 4px;
+}
+
+#logoutTologinButton {
+	border: 0;
+	padding: 12px;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border: 1px solid rgba(0, 0, 0 , .1);
+	font-size: 13px;
+	font-weight: 300;
+	width: 340px;
+	text-align: center;
+	margin-top: 20px;
+	background: #52a8e8; /* Old browsers */
+	background: -moz-linear-gradient(top,  #52a8e8 0%, #377ad0 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#52a8e8), color-stop(100%,#377ad0));
+	background: -webkit-linear-gradient(top,  #52a8e8 0%,#377ad0 100%);
+	background: -o-linear-gradient(top,  #52a8e8 0%,#377ad0 100%);
+	background: -ms-linear-gradient(top,  #52a8e8 0%,#377ad0 100%);
+	background: linear-gradient(to bottom,  #52a8e8 0%,#377ad0 100%);
+	border-right: 1px solid #2e69a3;
+	border-bottom: 1px solid #20559a;
+	border-left: 1px solid #2e69a3;
+	font-weight: bold;
+	color: #fff;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, .3);
+	text-transform: uppercase;
+	-webkit-box-shadow: inset 0 1px 0 0 #72b9eb, 0 1px 2px 0 #b3b3b3;
+    box-shadow: inset 0 1px 0 0 #72b9eb, 0 1px 2px 0 #b3b3b3;
+    font-size: 12px;
+    letter-spacing: 4px;
+    display: none;
+}
+
+#logoutTip {
+	position: absolute;
+	z-index: 2;
+	left: 70px;
+	top: 200px;
+	color: red;
+	font-size: xx-large;
+}
+
+/* 注销结束 */
